@@ -8,14 +8,13 @@ Find all of the blocks of continuous days worked for each employee.
 
 ```{r include=FALSE}
 library(tidyverse)
-library(reactable)
 
 timesheets <- read_csv("data/timesheets.csv")
 ```
 
 # Dataset
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
-reactable(timesheets)
+timesheets
 ```
 
 # Answer
@@ -34,9 +33,6 @@ timesheets %>%
     summarise(last_date = max(end_date)) %>% 
     mutate(n = row_number())
   )) %>% 
-  unnest() %>% 
-  reactable()
-  
-
+  unnest() 
 ```
 
