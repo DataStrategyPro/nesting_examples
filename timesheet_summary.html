@@ -178,11 +178,14 @@ pre code {
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
 <pre class="r"><code>reactable(timesheets)</code></pre>
-<div id="htmlwidget-e46046d34402796bb5f8" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e46046d34402796bb5f8">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"empid":[1,1,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,5],"start_date":["2016-01-01","2016-01-02","2016-01-03","2016-01-04","2016-01-09","2016-01-10","2016-01-11","2017-01-01","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2015-01-06","2015-01-07","2015-01-09","2015-01-10","2016-01-01","2015-01-01","2017-01-01","2017-05-09"],"end_date":["2016-01-02","2016-01-03","2016-01-04","2016-01-05","2016-01-10","2016-01-11","2016-01-12","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2015-01-07","2015-01-08","2015-01-10","2015-01-11","2016-01-02","2015-01-02","2017-01-02","2017-05-10"]},"columns":[{"accessor":"empid","name":"empid","type":"numeric"},{"accessor":"start_date","name":"start_date","type":"Date"},{"accessor":"end_date","name":"end_date","type":"Date"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"8a884c7f641762b5ce4bd639f62984a3","key":"8a884c7f641762b5ce4bd639f62984a3"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2a81917a39af9f73c2f7" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2a81917a39af9f73c2f7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"empid":[1,1,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,5],"start_date":["2016-01-01","2016-01-02","2016-01-03","2016-01-04","2016-01-09","2016-01-10","2016-01-11","2017-01-01","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2015-01-06","2015-01-07","2015-01-09","2015-01-10","2016-01-01","2015-01-01","2017-01-01","2017-05-09"],"end_date":["2016-01-02","2016-01-03","2016-01-04","2016-01-05","2016-01-10","2016-01-11","2016-01-12","2017-01-02","2017-01-03","2017-01-04","2017-01-05","2017-01-06","2015-01-07","2015-01-08","2015-01-10","2015-01-11","2016-01-02","2015-01-02","2017-01-02","2017-05-10"]},"columns":[{"accessor":"empid","name":"empid","type":"numeric"},{"accessor":"start_date","name":"start_date","type":"Date"},{"accessor":"end_date","name":"end_date","type":"Date"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"8a884c7f641762b5ce4bd639f62984a3","key":"8a884c7f641762b5ce4bd639f62984a3"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="answer" class="section level1">
 <h1>Answer</h1>
+<p>Note nest achieves a similar result to using window functions in SQL</p>
+<p>The map function allows you to apply functions to multiple subtables</p>
+<p>Fill is a useful tidyr function that fills in all of the NA values</p>
 <pre class="r"><code>timesheets %&gt;% 
   arrange(empid,start_date) %&gt;% 
   nest(-empid) %&gt;% 
@@ -199,8 +202,8 @@ pre code {
   )) %&gt;% 
   unnest() %&gt;% 
   reactable()</code></pre>
-<div id="htmlwidget-56722a358de6cd505dd3" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-56722a358de6cd505dd3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"empid":[1,1,2,3,3,3,4,4,5],"first_date":["2016-01-01","2016-01-09","2017-01-01","2015-01-06","2015-01-09","2016-01-01","2015-01-01","2017-01-01","2017-05-09"],"last_date":["2016-01-05","2016-01-12","2017-01-06","2015-01-08","2015-01-11","2016-01-02","2015-01-02","2017-01-02","2017-05-10"],"n":[1,2,1,1,2,3,1,2,1]},"columns":[{"accessor":"empid","name":"empid","type":"numeric"},{"accessor":"first_date","name":"first_date","type":"Date"},{"accessor":"last_date","name":"last_date","type":"Date"},{"accessor":"n","name":"n","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"aa74031bb9ad3132a13888e4b5c04791","key":"aa74031bb9ad3132a13888e4b5c04791"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c23539c60e0f2edf8fac" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c23539c60e0f2edf8fac">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"empid":[1,1,2,3,3,3,4,4,5],"first_date":["2016-01-01","2016-01-09","2017-01-01","2015-01-06","2015-01-09","2016-01-01","2015-01-01","2017-01-01","2017-05-09"],"last_date":["2016-01-05","2016-01-12","2017-01-06","2015-01-08","2015-01-11","2016-01-02","2015-01-02","2017-01-02","2017-05-10"],"n":[1,2,1,1,2,3,1,2,1]},"columns":[{"accessor":"empid","name":"empid","type":"numeric"},{"accessor":"first_date","name":"first_date","type":"Date"},{"accessor":"last_date","name":"last_date","type":"Date"},{"accessor":"n","name":"n","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"aa74031bb9ad3132a13888e4b5c04791","key":"aa74031bb9ad3132a13888e4b5c04791"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

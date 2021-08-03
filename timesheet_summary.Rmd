@@ -19,6 +19,15 @@ reactable(timesheets)
 ```
 
 # Answer
+
+Note nest achieves a similar result to using window functions in SQL
+
+The map function allows you to apply functions to multiple subtables
+
+Fill is a useful tidyr function that fills in all of the NA values 
+
+Reactable is a nice react based javascript table for visualizing the data
+
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
 timesheets %>% 
   arrange(empid,start_date) %>% 
