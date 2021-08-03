@@ -1,0 +1,42 @@
+---
+title: "Summarising Timesheet Data"
+output: html_document
+---
+
+Find all of the blocks of continuous days worked for each employee. 
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(reactable)
+
+timesheets <- read_csv("data/timesheets.csv")
+```
+
+# Dataset
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+reactable(timesheets)
+```
+
+# Answer
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+timesheets %>% 
+  arrange(empid,start_date) %>% 
+  nest(-empid) %>% 
+  mutate(data = data %>% map(
+    ~mutate(.,
+      n_days = start_date - lag(start_date),
+      first_date = ifelse(is.na(n_days) | n_days > 1,as.character(start_date) ,NA)
+      ) %>% 
+    fill(first_date) %>% 
+    mutate(first_date = as.Date(first_date)) %>% 
+    group_by(first_date) %>% 
+    summarise(last_date = max(end_date)) %>% 
+    mutate(n = row_number())
+  )) %>% 
+  unnest() %>% 
+  reactable()
+  
+
+```
+
