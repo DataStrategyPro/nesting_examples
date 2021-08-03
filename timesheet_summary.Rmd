@@ -18,7 +18,7 @@ timesheets <- read_csv("data/timesheets.csv")
 reactable(timesheets)
 ```
 
-# Answer
+# Answer in R
 
 Note nest achieves a similar result to using window functions in SQL
 
