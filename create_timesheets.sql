@@ -1,7 +1,5 @@
 create table timesheets (empid int, start_date date, end_date date);
 
-delete from timesheets;
-
 insert into timesheets values
 (1,'2016-01-01','2016-01-02'),
 (1,'2016-01-02','2016-01-03'),
